@@ -12,6 +12,7 @@ class SystemRDLLexer(lexer.RegexLexer):
         'root': [
             lexer.include('comments'),
             lexer.include('perl'),
+            lexer.include('verilog_pp'),
             lexer.include('prop-assign'),
             lexer.include('comp-def'),
 
@@ -30,7 +31,7 @@ class SystemRDLLexer(lexer.RegexLexer):
             ), suffix=r'\b'), token.Keyword.Type),
 
             lexer.include('literals'),
-            (r'[{}()\[\],.;\']', token.Punctuation),
+            (r'[#{}()\[\],.;\']', token.Punctuation),
             (r'[~!%^&*+-=|?:<>/-@]', token.Operator),
             (r'[a-zA-Z][\w]*', token.Name),
             (r'\s', token.Text)
@@ -45,6 +46,16 @@ class SystemRDLLexer(lexer.RegexLexer):
             (r'(?s)(<%=?)(.+?)(%>)', lexer.bygroups(token.Name.Tag, lexer.using(PerlLexer), token.Name.Tag)),
         ],
 
+        'verilog_pp': [
+            (r'`[ \t]*include[ \t]+(<[^"\r\n]+>|"[^"\r\n]+")', token.Comment.Preproc),
+            (r'`[ \t]*define', token.Comment.Preproc, 'verilog_define')
+        ],
+        'verilog_define':[
+            (r'\n', token.Comment.Preproc, '#pop'),
+            (r'\\\n', token.Comment.Preproc),
+            (r'[^\\\n]+', token.Comment.Preproc),  # all other characters
+        ],
+
         'literals': [
             (r'([0-9]+)?(\'h)[0-9a-fA-F_]+', token.Number.Hex),
             (r'([0-9]+)?(\'b)[01_]+', token.Number.Bin),
@@ -57,9 +68,8 @@ class SystemRDLLexer(lexer.RegexLexer):
         ],
         'string': [
             (r'"', token.String, '#pop'),
-            (r'\\([\\abfnrtv"\']|x[a-fA-F0-9]{2,4}|[0-7]{1,3})', token.String.Escape),
-            (r'[^\\"\n]+', token.String),  # all other characters
-            (r'\\\n', token.String),  # line continuation
+            (r'\\[\\"]', token.String.Escape),
+            (r'[^\\"]+', token.String),  # all other characters
             (r'\\', token.String),  # stray backslash
         ],
 

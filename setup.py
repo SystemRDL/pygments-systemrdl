@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup (
     name='pygments-systemrdl',
-    version="1.0.0",
+    version="1.1.0",
     author="Alex Mykyta",
     author_email="amykyta3@github.com",
     description="SystemRDL 2.0 lexer extension for Pygments",
