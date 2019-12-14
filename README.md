@@ -3,7 +3,7 @@
 # pygments-systemrdl
 
 This module implements a [SystemRDL 2.0](http://accellera.org/downloads/standards/systemrdl)
-language lexer for [Pygments](https://pytments.org).
+language lexer for [Pygments](https://pygments.org).
 The lexer is published as an entry point and, once installed, Pygments will
 pick it up automatically.
 
