@@ -24,21 +24,22 @@ class SystemRDLLexer(lexer.RegexLexer):
             (lexer.words((
                 'external', 'abstract', 'alias', 'unsigned'
             ), suffix=r'\b'), token.Keyword),
-            
+
             (lexer.words((
                 'bit', 'boolean', 'onreadtype', 'onwritetype', 'string',
-                'accesstype', 'addressingtype', 'component', 
+                'accesstype', 'addressingtype', 'component', 'longint'
             ), suffix=r'\b'), token.Keyword.Type),
 
             lexer.include('literals'),
             (r'[#{}()\[\],.;\']', token.Punctuation),
             (r'[~!%^&*+-=|?:<>/-@]', token.Operator),
             (r'[a-zA-Z][\w]*', token.Name),
-            (r'\s', token.Text)
+            (r'\\\r?\n', token.Text),
+            (r'\s', token.Text),
         ],
 
         'comments': [
-            (r'(?s)/\*.*\*/', token.Comment.Multiline),
+            (r'(?s)/\*.*?\*/', token.Comment.Multiline),
             (r'//.*?$', token.Comment.Single),
         ],
 
@@ -47,13 +48,13 @@ class SystemRDLLexer(lexer.RegexLexer):
         ],
 
         'verilog_pp': [
-            (r'`[ \t]*include[ \t]+(<[^"\r\n]+>|"[^"\r\n]+")', token.Comment.Preproc),
-            (r'`[ \t]*define', token.Comment.Preproc, 'verilog_define')
-        ],
-        'verilog_define':[
-            (r'\n', token.Comment.Preproc, '#pop'),
-            (r'\\\n', token.Comment.Preproc),
-            (r'[^\\\n]+', token.Comment.Preproc),  # all other characters
+            (r'`[ \t]*include', token.Comment.Preproc),
+            (r'`[ \t]*(ifdef|ifndef|elsif)', token.Comment.Preproc),
+            (r'`[ \t]*(else|endif)', token.Comment.Preproc),
+            (r'`[ \t]*undef', token.Comment.Preproc),
+            (r'`[ \t]*line', token.Comment.Preproc),
+            (r'`[ \t]*define', token.Comment.Preproc),
+            (r'`[ \t]*\w+', token.Comment.Preproc),
         ],
 
         'literals': [
@@ -74,11 +75,11 @@ class SystemRDLLexer(lexer.RegexLexer):
         ],
 
         'prop-assign': [
-            #(r'(\w+)\s*(;)', lexer.bygroups(token.Name.Attribute, token.Operator)),
             (r'(\w+)(\s*)(=)', lexer.bygroups(token.Name.Attribute, token.Text, token.Operator)),
             (r'(->)(\s*)(\w+)(\s*)(=)', lexer.bygroups(
                 token.Operator, token.Text, token.Name.Attribute, token.Text, token.Operator
             )),
+            #(r'(\w+)\s*(;)', lexer.bygroups(token.Name.Attribute, token.Operator)),
         ],
 
         'comp-def': [

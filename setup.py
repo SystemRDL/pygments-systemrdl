@@ -4,9 +4,14 @@ import setuptools
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
+with open(os.path.join("rdl_pygments", "__about__.py")) as f:
+    v_dict = {}
+    exec(f.read(), v_dict)
+    version = v_dict['__version__']
+
 setuptools.setup (
     name='pygments-systemrdl',
-    version="1.1.0",
+    version=version,
     author="Alex Mykyta",
     author_email="amykyta3@github.com",
     description="SystemRDL 2.0 lexer extension for Pygments",
