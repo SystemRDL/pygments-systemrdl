@@ -1,4 +1,5 @@
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pygments-systemrdl.svg)](https://pypi.org/project/pygments-systemrdl)
+[![Build Status](https://travis-ci.com/SystemRDL/pygments-systemrdl.svg?branch=master)](https://travis-ci.com/SystemRDL/pygments-systemrdl)
 
 # pygments-systemrdl
 

@@ -3,6 +3,9 @@ from pygments import token
 from pygments.lexers.perl import PerlLexer
 
 class SystemRDLLexer(lexer.RegexLexer):
+    """
+    Pygments Lexer for SystemRDL
+    """
     name = 'SystemRDL'
     aliases = ['systemrdl']
     filenames = ['*.rdl']
@@ -44,7 +47,9 @@ class SystemRDLLexer(lexer.RegexLexer):
         ],
 
         'perl': [
-            (r'(?s)(<%=?)(.+?)(%>)', lexer.bygroups(token.Name.Tag, lexer.using(PerlLexer), token.Name.Tag)),
+            (
+                r'(?s)(<%=?)(.+?)(%>)',
+                lexer.bygroups(token.Name.Tag, lexer.using(PerlLexer), token.Name.Tag)),
         ],
 
         'verilog_pp': [
@@ -83,6 +88,9 @@ class SystemRDLLexer(lexer.RegexLexer):
         ],
 
         'comp-def': [
-            (r'(addrmap|regfile|reg|field|mem|signal)(\s+)([a-zA-Z][\w]*)', lexer.bygroups(token.Keyword, token.Text, token.Name.Class))
+            (
+                r'(addrmap|regfile|reg|field|mem|signal)(\s+)([a-zA-Z][\w]*)',
+                lexer.bygroups(token.Keyword, token.Text, token.Name.Class)
+            )
         ],
     }
