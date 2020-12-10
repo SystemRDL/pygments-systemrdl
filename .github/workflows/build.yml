@@ -30,7 +30,6 @@ jobs:
 #-------------------------------------------------------------------------------
   build_sdist:
     needs:
-      - test
       - lint
     name: Build source distribution
     runs-on: ubuntu-latest
