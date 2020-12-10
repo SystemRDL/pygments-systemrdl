@@ -25,7 +25,7 @@ jobs:
 
       - name: Run Lint
         run: |
-          pylint --rcfile pylint.rc rdl_pygments
+          pylint --rcfile .pylint.rc rdl_pygments
 
 #-------------------------------------------------------------------------------
   build_sdist:
