@@ -1,10 +1,10 @@
 import os
 import setuptools
 
-with open("README.md", "r") as fh:
+with open("README.md", "r", encoding='utf-8') as fh:
     long_description = fh.read()
 
-with open(os.path.join("rdl_pygments", "__about__.py")) as f:
+with open(os.path.join("rdl_pygments", "__about__.py"), encoding='utf-8') as f:
     v_dict = {}
     exec(f.read(), v_dict)
     version = v_dict['__version__']
