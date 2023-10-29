@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pygments-systemrdl"
+dynamic = ["version"]
+
+authors = [
+    {name="Alex Mykyta"},
+]
+description = "SystemRDL 2.0 lexer extension for Pygments"
+readme = "README.md"
+license = {file = "LICENSE"}
+keywords = [
+    "SystmRDL", "pygments",
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 2",
+    "Programming Language :: Python :: 3",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Source = "https://github.com/SystemRDL/systemrdl-pygments"
+Tracker = "https://github.com/SystemRDL/systemrdl-pygments/issues"
+Changelog = "https://github.com/SystemRDL/systemrdl-pygments/releases"
+
+[tool.setuptools.dynamic]
+version = {attr = "rdl_pygments.__about__.__version__"}
+
+[project.entry-points."pygments.lexers"]
+rdllexer = "rdl_pygments.rdllexer:SystemRDLLexer"
