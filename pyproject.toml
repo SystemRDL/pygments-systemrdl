@@ -5,6 +5,9 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "pygments-systemrdl"
 dynamic = ["version"]
+dependencies = [
+    "pygments",
+]
 
 authors = [
     {name="Alex Mykyta"},
