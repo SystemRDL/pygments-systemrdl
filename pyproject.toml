@@ -16,7 +16,7 @@ description = "SystemRDL 2.0 lexer extension for Pygments"
 readme = "README.md"
 license = {file = "LICENSE"}
 keywords = [
-    "SystmRDL", "pygments",
+    "SystemRDL", "pygments",
 ]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
